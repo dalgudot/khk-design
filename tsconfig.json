@@ -18,8 +18,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/_app.js",
-    "pages/api/hello.js"
+    "pages/_app.jsx",
+    "pages/api/hello.jsx"
   ],
   "exclude": ["node_modules"]
 }
