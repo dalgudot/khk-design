@@ -2,7 +2,7 @@
 
 #### Tutorial
 
--[Typescript & Styled-components](https://velog.io/@hwang-eunji/styled-component-typescript)
+- [Typescript & Styled-components](https://velog.io/@hwang-eunji/styled-component-typescript)
 
 #### Library
 

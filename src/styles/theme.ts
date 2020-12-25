@@ -26,10 +26,10 @@ declare module 'styled-components' {
 
 export const darkTheme: DefaultTheme = {
   backgroundColor: '#212121',
-  gray1: '#8d8d8d',
+  gray1: '#EBEBF5',
 };
 
 export const lightTheme: DefaultTheme = {
   backgroundColor: '#212121',
-  gray1: '#8d8d8d',
+  gray1: '#EBEBF5',
 };
