@@ -14,12 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "pages/_app.jsx",
-    "pages/api/hello.jsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/canvas.js"],
   "exclude": ["node_modules"]
 }
