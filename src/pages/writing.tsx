@@ -1,11 +1,31 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import firebase from 'firebase/app';
+import { useEffect, useRef, useState } from 'react';
 
 const Writing = () => {
+  const firebaseDatabaseRef: any = firebase.database().ref('draft');
+  const textRef = useRef(null);
+  const [contents, setContents] = useState('');
+
+  useEffect(() => {
+    firebaseDatabaseRef.once('value', (snapshot: any) => {
+      const data = snapshot.val();
+      console.log(data);
+      data && setContents(data);
+    });
+  }, []);
+
+  const firebaseSet: Function = () => {
+    firebaseDatabaseRef.set(contents);
+  };
+
   return (
     <Container>
-      <button>저장하기</button>
+      <button onClick={() => firebaseSet()}>저장하기</button>
       <MultiLineTextField
+        ref={textRef}
+        value={contents}
+        onChange={(e) => setContents(e.target.value)}
         autoFocus={true}
         name="My Writing Space"
         placeholder="My Writing Space"
@@ -21,8 +41,14 @@ export default Writing;
 const Container = styled.main`
   display: flex;
   flex-direction: column;
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
+
+  p {
+    font-size: 24px;
+    margin-top: 96px;
+    color: #dfdfdf;
+  }
 
   button {
     position: fixed;
