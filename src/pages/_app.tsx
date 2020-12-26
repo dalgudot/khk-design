@@ -1,7 +1,5 @@
-import '../styles/font.css';
-import '../styles/globals.css';
-import { darkTheme, lightTheme } from '../styles/theme';
-import GlobalColors from '../styles/theme';
+import GlobalStyle from '../styles/globals';
+import GlobalColors, { darkTheme, lightTheme } from '../styles/theme';
 import { ThemeProvider } from 'styled-components';
 import type { AppProps /*, AppContext */ } from 'next/app';
 import initFirebase from '../utils/initFirebase';
@@ -13,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={mode}>
+      <GlobalStyle />
       <GlobalColors />
       <Component {...pageProps} />
     </ThemeProvider>
