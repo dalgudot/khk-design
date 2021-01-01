@@ -21,6 +21,17 @@ const Writing = () => {
   const btnRef = useRef(null);
   useRipple(btnRef);
 
+  // useEffect(() => {
+  //   firebase
+  //     .database()
+  //     .ref('Draft/20201226/-MPU66yah93SE4e__61l')
+  //     .once('value')
+  //     .then((snapshot) => {
+  //       const data = snapshot.val();
+  //       data && setContents(data);
+  //     });
+  // }, []);
+
   return (
     <Container>
       <button ref={btnRef} onClick={() => firebaseSet()}>
