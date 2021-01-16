@@ -2,17 +2,30 @@ import styled from 'styled-components';
 import firebase from 'firebase/app';
 import { useEffect, useRef, useState } from 'react';
 import { useRipple } from 'react-use-ripple';
+import StaggerDots from '../components/framer-motion/stagger-dots';
 
 const Writing = () => {
+  // const [loading, setLoading] = useState(false);
+
+  return (
+    // <>{loading ? <StaggerDots /> : <WritingSpace setLoading={setLoading} />}</>
+    <WritingSpace />
+  );
+};
+export default Writing;
+
+// component
+const WritingSpace = () => {
   const today = new Date();
   const year = String(today.getFullYear());
   const month = String(today.getMonth() + 1);
   const date = String(today.getDate());
   const when = `${year}${month}${date}`;
 
-  const firebaseDatabaseRef: any = firebase.database().ref(`Draft/${when}`);
-  const firebaseSet: Function = () => {
-    firebaseDatabaseRef.push().set(contents);
+  const firebaseDatabaseRef: any = firebase.database().ref(`Draft/Draft`);
+  const setFirebase: Function = () => {
+    // firebaseDatabaseRef.push().set(contents);
+    firebaseDatabaseRef.set(contents);
   };
 
   const textRef = useRef(null);
@@ -21,20 +34,24 @@ const Writing = () => {
   const btnRef = useRef(null);
   useRipple(btnRef);
 
-  // useEffect(() => {
-  //   firebase
-  //     .database()
-  //     .ref('Draft/20201226/-MPU66yah93SE4e__61l')
-  //     .once('value')
-  //     .then((snapshot) => {
-  //       const data = snapshot.val();
-  //       data && setContents(data);
-  //     });
-  // }, []);
+  useEffect(() => {
+    firebase
+      .database()
+      .ref(`Draft/Draft`)
+      .once('value')
+      .then((snapshot) => {
+        const data = snapshot.val();
+        data && setContents(data);
+        console.log('[Success]Firebase Realtime Database');
+      })
+      .catch(() => {
+        console.error('[Error]Firebase Realtime Database');
+      });
+  }, []);
 
   return (
     <Container>
-      <button ref={btnRef} onClick={() => firebaseSet()}>
+      <button ref={btnRef} onClick={() => setFirebase()}>
         저장하기
       </button>
       <MultiLineTextField
@@ -51,8 +68,7 @@ const Writing = () => {
   );
 };
 
-export default Writing;
-
+// style
 const Container = styled.main`
   display: flex;
   flex-direction: column;
